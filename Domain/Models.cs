@@ -1,0 +1,16 @@
+﻿namespace Domain.Models;
+
+public record Warehouse(string Id, Country Country);
+public record Destination(Country country);
+public record Package(WeightInKg WeightInKg);
+
+public record WeightInKg(decimal value)
+{
+    public static implicit operator WeightInKg(decimal value) => new(value);
+    public static implicit operator decimal(WeightInKg weight) => weight.value;
+};
+public enum Country
+{
+    SE,
+    UK
+}

@@ -1,9 +1,12 @@
-﻿namespace Domain;
+﻿using Domain.Models;
 
-internal class ShippingCalculator(IBaseCostCalculator baseCostCalculatorMock, ILastMileCostCalculator lastMileCostCalculatorMock)
+namespace Domain;
+
+internal class ShippingCalculator(IBaseCostCalculator baseCostCalculator, ILastMileCostCalculator lastMileCostCalculator)
 {
-    internal object EstimateShippingCost(Warehouse warehouse, Package package)
+    internal decimal EstimateShippingCost(Warehouse warehouse, Package package, Destination destination)
     {
-        throw new NotImplementedException();
+        return baseCostCalculator.CalculateBaseCost(package.WeightInKg) +
+               lastMileCostCalculator.CalculateLastMileCost(package.WeightInKg, destination.country);
     }
 }
